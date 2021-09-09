@@ -18,3 +18,4 @@ services:
       - db-store:/var/lib/mysql
 volumes:
   db-store:
+  
