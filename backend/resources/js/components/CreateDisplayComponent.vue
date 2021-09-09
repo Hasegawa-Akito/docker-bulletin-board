@@ -6,10 +6,10 @@
                     <!-- 強制スクロール位置 -->
                 <div class="col-12 mb-5 border border-primary">
                     <label class="mt-3">掲示板の題名：</label>
-                    <input type="text" class="form-control" v-model="title" placeholder="題名(必須)">
+                    <input type="text" name="title" class="form-control" v-model="title" placeholder="題名(必須)">
                     <br>
                     <label>カテゴリー：</label>
-                    <select class="form-control"  v-model="category">
+                    <select class="form-control"  v-model="category" name="category">
                         <option v-for="cate in categories" v-bind:key="cate.category">
                             {{cate.category}}
                         </option>

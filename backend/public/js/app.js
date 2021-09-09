@@ -38260,7 +38260,11 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
-                attrs: { type: "text", placeholder: "題名(必須)" },
+                attrs: {
+                  type: "text",
+                  name: "title",
+                  placeholder: "題名(必須)"
+                },
                 domProps: { value: _vm.title },
                 on: {
                   input: function($event) {
@@ -38288,6 +38292,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
+                  attrs: { name: "category" },
                   on: {
                     change: function($event) {
                       var $$selectedVal = Array.prototype.filter
