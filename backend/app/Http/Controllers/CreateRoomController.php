@@ -17,6 +17,6 @@ class CreateRoomController extends Controller
         $room=new Room;
         $room->room_create($room_info);
         
-        dd("成功");
+        return redirect(url("/chat"));
     }
 }

@@ -24,7 +24,7 @@
                         <h4 class="my-0 fw-normal">ルーム検索</h4>
                     </div>
                     <div class="card-body">
-                        <h1 class="card-title pricing-card-title">既存のルームに参加する</h1>
+                        <h1 class="card-title pricing-card-title">既存ルームに参加する</h1>
                         <ul class="list-unstyled mt-3 mb-4">
                             <li>自分の参加したい話題のルームを探しましょう</li>
                             <li>ルームid , 題名 , ジャンルから検索できます</li>

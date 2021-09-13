@@ -39439,7 +39439,7 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "card-body" }, [
                 _c("h1", { staticClass: "card-title pricing-card-title" }, [
-                  _vm._v("既存のルームに参加する")
+                  _vm._v("既存ルームに参加する")
                 ]),
                 _vm._v(" "),
                 _vm._m(3),
