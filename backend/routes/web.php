@@ -21,4 +21,8 @@ Route::get('/home', function () {
     return view('home');
 });
 
+Route::get('/chat', function () {
+    return view('chat');
+});
+
 Route::post('/create_room','App\Http\Controllers\CreateRoomController@create_room');
