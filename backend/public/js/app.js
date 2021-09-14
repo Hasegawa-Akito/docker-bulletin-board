@@ -2160,6 +2160,16 @@ __webpack_require__.r(__webpack_exports__);
       drawer: null,
       links: [['mdi-inbox-arrow-down', 'Inbox'], ['mdi-send', 'Send'], ['mdi-delete', 'Trash'], ['mdi-alert-octagon', 'Spam']]
     };
+  },
+  props: {
+    room_id: {
+      type: String,
+      required: true
+    },
+    title: {
+      type: String,
+      required: true
+    }
   }
 });
 
@@ -39038,7 +39048,9 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c("v-toolbar-title", [_vm._v("掲示板題名　id:000 ")])
+              _c("v-toolbar-title", [
+                _vm._v(_vm._s(_vm.title) + "　id:" + _vm._s(_vm.room_id) + " ")
+              ])
             ],
             1
           ),
@@ -39090,11 +39102,7 @@ var render = function() {
                                                       "white-space": "pre-wrap"
                                                     }
                                                   },
-                                                  [
-                                                    _vm._v(
-                                                      "昨日阪神負けてて草。大差で負けて悔しいねえ。いっつも巨人を煽るくせに結局クソ雑魚には変わりないな。"
-                                                    )
-                                                  ]
+                                                  [_vm._v("テスト投稿")]
                                                 )
                                               ]),
                                               _vm._v(" "),

@@ -9,7 +9,10 @@
 
 @section('content')
 
-<chat-component></chat-component>
+<chat-component
+:room_id="{{json_encode($room_id)}}"
+:title="{{json_encode($title)}}"
+></chat-component>
   
 
 

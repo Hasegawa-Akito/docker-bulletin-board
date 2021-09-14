@@ -9,7 +9,7 @@
         <v-btn icon>
           <v-icon>mdi-arrow-left</v-icon>
         </v-btn>
-        <v-toolbar-title>掲示板題名　id:000 </v-toolbar-title>
+        <v-toolbar-title>{{title}}　id:{{room_id}} </v-toolbar-title>
       </v-app-bar>
 
       <v-card-text>
@@ -38,7 +38,7 @@
 
                         <v-list-item-subtitle>
                           <!--改行:style="white-space: pre-wrap;"-->
-                          <p style="white-space: pre-wrap;">昨日阪神負けてて草。大差で負けて悔しいねえ。いっつも巨人を煽るくせに結局クソ雑魚には変わりないな。</p>
+                          <p style="white-space: pre-wrap;">テスト投稿</p>
                         </v-list-item-subtitle>
                         <small>2021-08-16 22:00</small>
                       </v-list-item-content>
@@ -98,10 +98,18 @@
           ['mdi-delete', 'Trash'],
           ['mdi-alert-octagon', 'Spam'],
         ],
-        
-        
       };
     },
+    props: {
+            room_id:{
+                type:String,
+                required:true
+            },
+            title:{
+                type:String,
+                required:true
+            },
+        },
 
   }
 </script>
