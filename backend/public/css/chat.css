@@ -1,0 +1,11 @@
+.hidden{
+    height: 150px;
+    width: 100%;
+}
+.bottom-fixed{
+    background-color: white;
+    border-top: solid 1px gray;
+    z-index: 9999;
+    position: fixed;
+    bottom: 0; 
+}

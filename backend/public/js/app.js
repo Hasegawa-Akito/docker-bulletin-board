@@ -2153,13 +2153,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -39029,149 +39022,201 @@ var render = function() {
     { attrs: { id: "inspire" } },
     [
       _c(
-        "v-system-bar",
-        { attrs: { app: "" } },
-        [
-          _c("v-spacer"),
-          _vm._v(" "),
-          _c("v-icon", [_vm._v("mdi-square")]),
-          _vm._v(" "),
-          _c("v-icon", [_vm._v("mdi-circle")]),
-          _vm._v(" "),
-          _c("v-icon", [_vm._v("mdi-triangle")])
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-navigation-drawer",
-        {
-          attrs: { app: "" },
-          model: {
-            value: _vm.drawer,
-            callback: function($$v) {
-              _vm.drawer = $$v
-            },
-            expression: "drawer"
-          }
-        },
+        "v-card",
+        { staticClass: "mx-auto overflow-hidden" },
         [
           _c(
-            "v-sheet",
-            { staticClass: "pa-4", attrs: { color: "grey lighten-4" } },
+            "v-app-bar",
+            {
+              attrs: { color: "deep-purple accent-4", dark: "", prominent: "" }
+            },
             [
-              _c("v-avatar", {
-                staticClass: "mb-4",
-                attrs: { color: "grey darken-1", size: "64" }
-              }),
+              _c(
+                "v-btn",
+                { attrs: { icon: "" } },
+                [_c("v-icon", [_vm._v("mdi-arrow-left")])],
+                1
+              ),
               _vm._v(" "),
-              _c("div", [_vm._v("john@vuetifyjs.com")])
+              _c("v-toolbar-title", [_vm._v("掲示板題名　id:000 ")])
             ],
             1
           ),
           _vm._v(" "),
-          _c("v-divider"),
-          _vm._v(" "),
           _c(
-            "v-list",
-            _vm._l(_vm.links, function(ref) {
-              var icon = ref[0]
-              var text = ref[1]
-              return _c(
-                "v-list-item",
-                { key: icon, attrs: { link: "" } },
+            "v-card-text",
+            [
+              _c(
+                "v-main",
                 [
                   _c(
-                    "v-list-item-icon",
-                    [_c("v-icon", [_vm._v(_vm._s(icon))])],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-list-item-content",
-                    [_c("v-list-item-title", [_vm._v(_vm._s(text))])],
+                    "v-row",
+                    _vm._l(_vm.cards, function(card) {
+                      return _c(
+                        "v-col",
+                        { key: card, attrs: { cols: "12" } },
+                        [
+                          _c(
+                            "v-card",
+                            [
+                              _c("v-subheader", [_vm._v(_vm._s(card))]),
+                              _vm._v(" "),
+                              _c(
+                                "v-list",
+                                { attrs: { "two-line": "" } },
+                                [
+                                  _vm._l(6, function(n) {
+                                    return [
+                                      _c(
+                                        "v-list-item",
+                                        { key: n },
+                                        [
+                                          _c(
+                                            "v-list-item-content",
+                                            [
+                                              _c("v-list-item-title", [
+                                                _c("b", [
+                                                  _vm._v(
+                                                    "っっっっっっっっっっっっっっっっっs"
+                                                  )
+                                                ])
+                                              ]),
+                                              _vm._v(" "),
+                                              _c("v-list-item-subtitle", [
+                                                _c(
+                                                  "p",
+                                                  {
+                                                    staticStyle: {
+                                                      "white-space": "pre-wrap"
+                                                    }
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "昨日阪神負けてて草。大差で負けて悔しいねえ。いっつも巨人を煽るくせに結局クソ雑魚には変わりないな。"
+                                                    )
+                                                  ]
+                                                )
+                                              ]),
+                                              _vm._v(" "),
+                                              _c("small", [
+                                                _vm._v("2021-08-16 22:00")
+                                              ])
+                                            ],
+                                            1
+                                          )
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      n !== 6
+                                        ? _c("v-divider", {
+                                            key: "divider-" + n,
+                                            attrs: { inset: "" }
+                                          })
+                                        : _vm._e()
+                                    ]
+                                  })
+                                ],
+                                2
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    }),
                     1
                   )
                 ],
                 1
               )
-            }),
+            ],
             1
           )
         ],
         1
       ),
       _vm._v(" "),
+      _c("div", { staticClass: "hidden" }),
+      _vm._v(" "),
       _c(
-        "v-main",
+        "v-card",
         [
           _c(
-            "v-container",
-            { staticClass: "py-8 px-6", attrs: { fluid: "" } },
+            "v-card-text",
+            { ref: "input_box", staticClass: "bottom-fixed" },
             [
               _c(
                 "v-row",
-                _vm._l(_vm.cards, function(card) {
-                  return _c(
+                [
+                  _c(
                     "v-col",
-                    { key: card, attrs: { cols: "12" } },
+                    { attrs: { cols: "3" } },
                     [
-                      _c(
-                        "v-card",
-                        [
-                          _c("v-subheader", [_vm._v(_vm._s(card))]),
-                          _vm._v(" "),
-                          _c(
-                            "v-list",
-                            { attrs: { "two-line": "" } },
-                            [
-                              _vm._l(6, function(n) {
-                                return [
-                                  _c(
-                                    "v-list-item",
-                                    { key: n },
-                                    [
-                                      _c("v-list-item-avatar", {
-                                        attrs: { color: "grey darken-1" }
-                                      }),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-list-item-content",
-                                        [
-                                          _c("v-list-item-title", [
-                                            _vm._v("Message " + _vm._s(n))
-                                          ]),
-                                          _vm._v(" "),
-                                          _c("v-list-item-subtitle", [
-                                            _vm._v(
-                                              "\n                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil repellendus distinctio similique\n                    "
-                                            )
-                                          ])
-                                        ],
-                                        1
-                                      )
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  n !== 6
-                                    ? _c("v-divider", {
-                                        key: "divider-" + n,
-                                        attrs: { inset: "" }
-                                      })
-                                    : _vm._e()
-                                ]
-                              })
-                            ],
-                            2
-                          )
-                        ],
-                        1
-                      )
+                      _c("v-text-field", {
+                        attrs: { label: "名前", clearable: "" },
+                        model: {
+                          value: _vm.name,
+                          callback: function($$v) {
+                            _vm.name = $$v
+                          },
+                          expression: "name"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-col",
+                    [
+                      _c("v-text-field", {
+                        attrs: {
+                          autofocus: "",
+                          label: "メッセージ ※Enterでも送信できるよ",
+                          clearable: ""
+                        },
+                        on: {
+                          keyup: function($event) {
+                            if (
+                              !$event.type.indexOf("key") &&
+                              _vm._k(
+                                $event.keyCode,
+                                "enter",
+                                13,
+                                $event.key,
+                                "Enter"
+                              )
+                            ) {
+                              return null
+                            }
+                            return _vm.send_onClick.apply(null, arguments)
+                          }
+                        },
+                        model: {
+                          value: _vm.message,
+                          callback: function($$v) {
+                            _vm.message = $$v
+                          },
+                          expression: "message"
+                        }
+                      })
                     ],
                     1
                   )
-                }),
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-btn",
+                {
+                  staticClass: "info",
+                  attrs: { small: "" },
+                  on: { click: _vm.send_onClick }
+                },
+                [_c("v-icon", [_vm._v("mdi-play")]), _vm._v("送信\n      ")],
                 1
               )
             ],
