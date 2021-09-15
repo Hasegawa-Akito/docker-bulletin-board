@@ -1,6 +1,6 @@
 <template>
   <v-app id="inspire">
-    <v-card class="mx-auto overflow-hidden">
+    <v-card class="overflow-hidden">
       <v-app-bar
         color="deep-purple accent-4"
         dark
@@ -33,12 +33,12 @@
 
                       <v-list-item-content>
                         <v-list-item-title>
-                          <b>っっっっっっっっっっっっっっっっっs</b>
+                          <b>{{name}}</b>
                         </v-list-item-title>
 
                         <v-list-item-subtitle>
                           <!--改行:style="white-space: pre-wrap;"-->
-                          <p style="white-space: pre-wrap;">テスト投稿</p>
+                          <p style="white-space: pre-wrap;">{{message}}</p>
                         </v-list-item-subtitle>
                         <small>2021-08-16 22:00</small>
                       </v-list-item-content>
@@ -58,7 +58,7 @@
       </v-card-text>
     </v-card>
     <div class="hidden"></div>
-    <v-card>
+    <v-card class="overflow-hidden">
       <v-card-text class="bottom-fixed" ref="input_box">
         <v-row>
           <v-col cols="3">
@@ -87,6 +87,9 @@
 </template>
 
 <script>
+//非同期通信に必要(vueが使えるなら特に他にすることはない)
+import axios from 'axios'
+
   export default {
     data(){
       return {
@@ -98,18 +101,35 @@
           ['mdi-delete', 'Trash'],
           ['mdi-alert-octagon', 'Spam'],
         ],
+        name:"匿名希望",
+        message:"",
+
       };
     },
     props: {
             room_id:{
-                type:String,
+                type:Number,
                 required:true
             },
             title:{
                 type:String,
                 required:true
             },
-        },
+            api_url:{
+                type:String,
+                required:true
+            },
+    },
+    methods:{
+            send_onClick:function(event){
+              //const ans=confirm('グループ上からアナウンスが消されます。本当に削除しますか？');
+              axios.post(this.api_url,{name:this.name})
+                .then((response)=>{
+                    this.message=response.data.name;
+                    
+                })
+            },
+    },
 
   }
 </script>

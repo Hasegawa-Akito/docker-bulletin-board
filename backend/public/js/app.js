@@ -2065,6 +2065,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2153,22 +2155,42 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//非同期通信に必要(vueが使えるなら特に他にすることはない)
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       cards: ['Today', 'Yesterday'],
       drawer: null,
-      links: [['mdi-inbox-arrow-down', 'Inbox'], ['mdi-send', 'Send'], ['mdi-delete', 'Trash'], ['mdi-alert-octagon', 'Spam']]
+      links: [['mdi-inbox-arrow-down', 'Inbox'], ['mdi-send', 'Send'], ['mdi-delete', 'Trash'], ['mdi-alert-octagon', 'Spam']],
+      name: "匿名希望",
+      message: ""
     };
   },
   props: {
     room_id: {
-      type: String,
+      type: Number,
       required: true
     },
     title: {
       type: String,
       required: true
+    },
+    api_url: {
+      type: String,
+      required: true
+    }
+  },
+  methods: {
+    send_onClick: function send_onClick(event) {
+      var _this = this;
+
+      //const ans=confirm('グループ上からアナウンスが消されます。本当に削除しますか？');
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post(this.api_url, {
+        name: this.name
+      }).then(function (response) {
+        _this.message = response.data.name;
+      });
     }
   }
 });
@@ -39033,7 +39055,7 @@ var render = function() {
     [
       _c(
         "v-card",
-        { staticClass: "mx-auto overflow-hidden" },
+        { staticClass: "overflow-hidden" },
         [
           _c(
             "v-app-bar",
@@ -39088,9 +39110,7 @@ var render = function() {
                                             [
                                               _c("v-list-item-title", [
                                                 _c("b", [
-                                                  _vm._v(
-                                                    "っっっっっっっっっっっっっっっっっs"
-                                                  )
+                                                  _vm._v(_vm._s(_vm.name))
                                                 ])
                                               ]),
                                               _vm._v(" "),
@@ -39102,7 +39122,7 @@ var render = function() {
                                                       "white-space": "pre-wrap"
                                                     }
                                                   },
-                                                  [_vm._v("テスト投稿")]
+                                                  [_vm._v(_vm._s(_vm.message))]
                                                 )
                                               ]),
                                               _vm._v(" "),
@@ -39150,6 +39170,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "v-card",
+        { staticClass: "overflow-hidden" },
         [
           _c(
             "v-card-text",

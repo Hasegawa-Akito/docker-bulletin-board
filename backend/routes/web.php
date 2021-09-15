@@ -28,3 +28,5 @@ Route::get('/chat', function () {
 Route::post('/create_room','App\Http\Controllers\RoomController@create_room');
 
 Route::get('/chat/{room_id}','App\Http\Controllers\ChatController@show_chat');
+
+Route::post('/send_message','App\Http\Controllers\MessageController@send_message');
