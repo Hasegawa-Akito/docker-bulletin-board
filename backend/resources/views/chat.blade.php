@@ -12,7 +12,8 @@
 <chat-component
 :room_id="{{json_encode($room_id)}}"
 :title="{{json_encode($title)}}"
-:api_url="{{json_encode(url('/send_message'))}}"
+:send_message_url="{{json_encode(url('/send_message'))}}"
+:show_content_url="{{json_encode(url('/show_content'))}}"
 ></chat-component>
   
 

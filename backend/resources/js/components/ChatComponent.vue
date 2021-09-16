@@ -16,15 +16,14 @@
         <v-main>
           <v-row>
             <v-col
-              v-for="card in cards"
-              :key="card"
+              
               cols="12"
             >
               <v-card>
-                <v-subheader>{{ card }}</v-subheader>
+                
 
                 <v-list two-line>
-                  <template v-for="n in 6">
+                  <template v-for="n in content_num">
                     <v-list-item
 
                       :key="n"
@@ -33,19 +32,19 @@
 
                       <v-list-item-content>
                         <v-list-item-title>
-                          <b>{{name}}</b>
+                          <b>{{contents[n-1].name}}</b>
                         </v-list-item-title>
 
                         <v-list-item-subtitle>
                           <!--改行:style="white-space: pre-wrap;"-->
-                          <p style="white-space: pre-wrap;">{{message}}</p>
+                          <p style="white-space: pre-wrap;">{{contents[n-1].message}}</p>
                         </v-list-item-subtitle>
-                        <small>2021-08-16 22:00</small>
+                        <small>{{contents[n-1].updated_at}}</small>
                       </v-list-item-content>
                     </v-list-item>
 
                     <v-divider
-                      v-if="n !== 6"
+                      v-if="n !== content_num"
                       :key="`divider-${n}`"
                       inset
                     ></v-divider>
@@ -71,10 +70,10 @@
           <v-col>
             <v-text-field
               autofocus
-              label="メッセージ ※Enterでも送信できるよ"
+              label="メッセージ"
               v-model="message"
               clearable
-              @keyup.enter="send_onClick"
+              
             ></v-text-field>
           </v-col>
         </v-row>
@@ -87,23 +86,17 @@
 </template>
 
 <script>
+
 //非同期通信に必要(vueが使えるなら特に他にすることはない)
 import axios from 'axios'
 
   export default {
     data(){
       return {
-        cards: ['Today', 'Yesterday'],
-        drawer: null,
-        links: [
-          ['mdi-inbox-arrow-down', 'Inbox'],
-          ['mdi-send', 'Send'],
-          ['mdi-delete', 'Trash'],
-          ['mdi-alert-octagon', 'Spam'],
-        ],
         name:"匿名希望",
         message:"",
-
+        contents:"",
+        content_num:0
       };
     },
     props: {
@@ -115,20 +108,41 @@ import axios from 'axios'
                 type:String,
                 required:true
             },
-            api_url:{
+            send_message_url:{
+                type:String,
+                required:true
+            },
+            show_content_url:{
                 type:String,
                 required:true
             },
     },
     methods:{
-            send_onClick:function(event){
-              //const ans=confirm('グループ上からアナウンスが消されます。本当に削除しますか？');
-              axios.post(this.api_url,{name:this.name})
+            send_onClick:function(){
+              axios.post(this.send_message_url,{room_id:this.room_id,message:this.message,name:this.name})
                 .then((response)=>{
-                    this.message=response.data.name;
+                    this.content_num=response.data.contents.length;
+                    this.contents=response.data.contents;
+                    this.message="";
                     
                 })
             },
+            EndScroll:function(){
+              window.scrollTo({
+                          top: 10000000000,
+                          behavior: "smooth"
+              });
+            },
+    },
+    created(){
+              axios.post(this.show_content_url,{room_id:this.room_id})
+                .then((response)=>{
+                    this.content_num=response.data.contents.length;
+                    this.contents=response.data.contents;
+              })
+    },
+    updated() {
+               this.EndScroll();
     },
 
   }

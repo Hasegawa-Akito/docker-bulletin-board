@@ -2154,17 +2154,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 //非同期通信に必要(vueが使えるなら特に他にすることはない)
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      cards: ['Today', 'Yesterday'],
-      drawer: null,
-      links: [['mdi-inbox-arrow-down', 'Inbox'], ['mdi-send', 'Send'], ['mdi-delete', 'Trash'], ['mdi-alert-octagon', 'Spam']],
       name: "匿名希望",
-      message: ""
+      message: "",
+      contents: "",
+      content_num: 0
     };
   },
   props: {
@@ -2176,22 +2174,48 @@ __webpack_require__.r(__webpack_exports__);
       type: String,
       required: true
     },
-    api_url: {
+    send_message_url: {
+      type: String,
+      required: true
+    },
+    show_content_url: {
       type: String,
       required: true
     }
   },
   methods: {
-    send_onClick: function send_onClick(event) {
+    send_onClick: function send_onClick() {
       var _this = this;
 
-      //const ans=confirm('グループ上からアナウンスが消されます。本当に削除しますか？');
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post(this.api_url, {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post(this.send_message_url, {
+        room_id: this.room_id,
+        message: this.message,
         name: this.name
       }).then(function (response) {
-        _this.message = response.data.name;
+        _this.content_num = response.data.contents.length;
+        _this.contents = response.data.contents;
+        _this.message = "";
+      });
+    },
+    EndScroll: function EndScroll() {
+      window.scrollTo({
+        top: 10000000000,
+        behavior: "smooth"
       });
     }
+  },
+  created: function created() {
+    var _this2 = this;
+
+    axios__WEBPACK_IMPORTED_MODULE_0___default().post(this.show_content_url, {
+      room_id: this.room_id
+    }).then(function (response) {
+      _this2.content_num = response.data.contents.length;
+      _this2.contents = response.data.contents;
+    });
+  },
+  updated: function updated() {
+    this.EndScroll();
   }
 });
 
@@ -39085,21 +39109,19 @@ var render = function() {
                 [
                   _c(
                     "v-row",
-                    _vm._l(_vm.cards, function(card) {
-                      return _c(
+                    [
+                      _c(
                         "v-col",
-                        { key: card, attrs: { cols: "12" } },
+                        { attrs: { cols: "12" } },
                         [
                           _c(
                             "v-card",
                             [
-                              _c("v-subheader", [_vm._v(_vm._s(card))]),
-                              _vm._v(" "),
                               _c(
                                 "v-list",
                                 { attrs: { "two-line": "" } },
                                 [
-                                  _vm._l(6, function(n) {
+                                  _vm._l(_vm.content_num, function(n) {
                                     return [
                                       _c(
                                         "v-list-item",
@@ -39110,7 +39132,11 @@ var render = function() {
                                             [
                                               _c("v-list-item-title", [
                                                 _c("b", [
-                                                  _vm._v(_vm._s(_vm.name))
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      _vm.contents[n - 1].name
+                                                    )
+                                                  )
                                                 ])
                                               ]),
                                               _vm._v(" "),
@@ -39122,12 +39148,24 @@ var render = function() {
                                                       "white-space": "pre-wrap"
                                                     }
                                                   },
-                                                  [_vm._v(_vm._s(_vm.message))]
+                                                  [
+                                                    _vm._v(
+                                                      _vm._s(
+                                                        _vm.contents[n - 1]
+                                                          .message
+                                                      )
+                                                    )
+                                                  ]
                                                 )
                                               ]),
                                               _vm._v(" "),
                                               _c("small", [
-                                                _vm._v("2021-08-16 22:00")
+                                                _vm._v(
+                                                  _vm._s(
+                                                    _vm.contents[n - 1]
+                                                      .updated_at
+                                                  )
+                                                )
                                               ])
                                             ],
                                             1
@@ -39136,7 +39174,7 @@ var render = function() {
                                         1
                                       ),
                                       _vm._v(" "),
-                                      n !== 6
+                                      n !== _vm.content_num
                                         ? _c("v-divider", {
                                             key: "divider-" + n,
                                             attrs: { inset: "" }
@@ -39153,7 +39191,7 @@ var render = function() {
                         ],
                         1
                       )
-                    }),
+                    ],
                     1
                   )
                 ],
@@ -39203,25 +39241,8 @@ var render = function() {
                       _c("v-text-field", {
                         attrs: {
                           autofocus: "",
-                          label: "メッセージ ※Enterでも送信できるよ",
+                          label: "メッセージ",
                           clearable: ""
-                        },
-                        on: {
-                          keyup: function($event) {
-                            if (
-                              !$event.type.indexOf("key") &&
-                              _vm._k(
-                                $event.keyCode,
-                                "enter",
-                                13,
-                                $event.key,
-                                "Enter"
-                              )
-                            ) {
-                              return null
-                            }
-                            return _vm.send_onClick.apply(null, arguments)
-                          }
                         },
                         model: {
                           value: _vm.message,
