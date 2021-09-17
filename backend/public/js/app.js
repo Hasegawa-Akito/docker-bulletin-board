@@ -2154,6 +2154,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //非同期通信に必要(vueが使えるなら特に他にすることはない)
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2181,6 +2197,10 @@ __webpack_require__.r(__webpack_exports__);
     show_content_url: {
       type: String,
       required: true
+    },
+    back_url: {
+      type: String,
+      required: true
     }
   },
   methods: {
@@ -2196,26 +2216,36 @@ __webpack_require__.r(__webpack_exports__);
         _this.contents = response.data.contents;
         _this.message = "";
       });
+      this.EndScroll();
     },
     EndScroll: function EndScroll() {
       window.scrollTo({
         top: 10000000000,
         behavior: "smooth"
       });
+    },
+    show_content: function show_content() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post(this.show_content_url, {
+        room_id: this.room_id
+      }).then(function (response) {
+        _this2.content_num = response.data.contents.length;
+        _this2.contents = response.data.contents;
+      });
+    },
+    scroll_onClick: function scroll_onClick() {
+      this.EndScroll();
+    },
+    reload_onClick: function reload_onClick() {
+      this.content_num = 0;
+      this.show_content();
     }
   },
   created: function created() {
-    var _this2 = this;
+    this.show_content(); //五秒ごとにcontent更新
 
-    axios__WEBPACK_IMPORTED_MODULE_0___default().post(this.show_content_url, {
-      room_id: this.room_id
-    }).then(function (response) {
-      _this2.content_num = response.data.contents.length;
-      _this2.contents = response.data.contents;
-    });
-  },
-  updated: function updated() {
-    this.EndScroll();
+    setInterval(this.show_content, 5000);
   }
 });
 
@@ -39088,15 +39118,41 @@ var render = function() {
             },
             [
               _c(
-                "v-btn",
-                { attrs: { icon: "" } },
-                [_c("v-icon", [_vm._v("mdi-arrow-left")])],
+                "v-form",
+                { attrs: { method: "get", action: _vm.back_url } },
+                [
+                  _c(
+                    "v-btn",
+                    { attrs: { icon: "", type: "submit" } },
+                    [_c("v-icon", [_vm._v("mdi-arrow-left")])],
+                    1
+                  )
+                ],
                 1
               ),
               _vm._v(" "),
               _c("v-toolbar-title", [
-                _vm._v(_vm._s(_vm.title) + "　id:" + _vm._s(_vm.room_id) + " ")
-              ])
+                _vm._v("\n        " + _vm._s(_vm.title)),
+                _c("br"),
+                _vm._v(" "),
+                _c("small", [_vm._v("id:" + _vm._s(_vm.room_id))])
+              ]),
+              _vm._v(" "),
+              _c("v-spacer"),
+              _vm._v(" "),
+              _c(
+                "v-btn",
+                { attrs: { icon: "" }, on: { click: _vm.reload_onClick } },
+                [_c("v-icon", [_vm._v("mdi-sync")])],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-btn",
+                { attrs: { icon: "" }, on: { click: _vm.scroll_onClick } },
+                [_c("v-icon", [_vm._v("mdi-chevron-down-circle")])],
+                1
+              )
             ],
             1
           ),

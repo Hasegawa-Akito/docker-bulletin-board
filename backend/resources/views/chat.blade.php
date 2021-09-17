@@ -14,6 +14,7 @@
 :title="{{json_encode($title)}}"
 :send_message_url="{{json_encode(url('/send_message'))}}"
 :show_content_url="{{json_encode(url('/show_content'))}}"
+:back_url="{{json_encode(url('/home'))}}"
 ></chat-component>
   
 

@@ -6,10 +6,26 @@
         dark
         prominent
       >
-        <v-btn icon>
-          <v-icon>mdi-arrow-left</v-icon>
+        <v-form
+        method="get"
+        v-bind:action="back_url"
+        >
+          <v-btn icon type="submit">
+            <v-icon>mdi-arrow-left</v-icon>
+          </v-btn>
+        </v-form>
+        
+        <v-toolbar-title>
+          {{title}}<br/>
+          <small>id:{{room_id}}</small>
+        </v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-btn icon @click="reload_onClick">
+          <v-icon>mdi-sync</v-icon>
         </v-btn>
-        <v-toolbar-title>{{title}}　id:{{room_id}} </v-toolbar-title>
+        <v-btn icon　@click="scroll_onClick">
+          <v-icon>mdi-chevron-down-circle</v-icon>
+        </v-btn>
       </v-app-bar>
 
       <v-card-text>
@@ -116,6 +132,10 @@ import axios from 'axios'
                 type:String,
                 required:true
             },
+            back_url:{
+                type:String,
+                required:true
+            },
     },
     methods:{
             send_onClick:function(){
@@ -125,7 +145,8 @@ import axios from 'axios'
                     this.contents=response.data.contents;
                     this.message="";
                     
-                })
+                });
+                this.EndScroll();
             },
             EndScroll:function(){
               window.scrollTo({
@@ -133,17 +154,27 @@ import axios from 'axios'
                           behavior: "smooth"
               });
             },
-    },
-    created(){
+            show_content:function(){
               axios.post(this.show_content_url,{room_id:this.room_id})
                 .then((response)=>{
                     this.content_num=response.data.contents.length;
                     this.contents=response.data.contents;
               })
+            },
+            scroll_onClick:function(){
+                this.EndScroll();
+            },
+            reload_onClick:function(){
+                this.content_num=0;
+                this.show_content();
+            },
     },
-    updated() {
-               this.EndScroll();
+    created(){
+              this.show_content();
+              //五秒ごとにcontent更新
+              setInterval(this.show_content, 5000);
     },
+    
 
   }
 </script>
