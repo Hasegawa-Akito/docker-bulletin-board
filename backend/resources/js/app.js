@@ -24,6 +24,7 @@ Vue.component('home-component', require('./components/HomeComponent.vue').defaul
 Vue.component('create-display-component', require('./components/CreateDisplayComponent.vue').default);
 Vue.component('serch-display-component', require('./components/SerchDisplayComponent.vue').default);
 Vue.component('chat-component', require('./components/ChatComponent.vue').default);
+Vue.component('serch-component', require('./components/SerchComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="{{asset('css/chat.css')}}">
 @endsection
 
-@section('title', 'ホーム画面')
+@section('title', 'チャット画面')
 
 @section('content')
 
