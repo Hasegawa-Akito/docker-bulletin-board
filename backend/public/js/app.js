@@ -2170,6 +2170,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 //非同期通信に必要(vueが使えるなら特に他にすることはない)
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2240,6 +2241,10 @@ __webpack_require__.r(__webpack_exports__);
     reload_onClick: function reload_onClick() {
       this.content_num = 0;
       this.show_content();
+    },
+    transform_Date: function transform_Date(iso) {
+      var date = new Date(iso);
+      return date.toLocaleString();
     }
   },
   created: function created() {
@@ -39461,8 +39466,10 @@ var render = function() {
                                               _c("small", [
                                                 _vm._v(
                                                   _vm._s(
-                                                    _vm.contents[n - 1]
-                                                      .updated_at
+                                                    _vm.transform_Date(
+                                                      _vm.contents[n - 1]
+                                                        .updated_at
+                                                    )
                                                   )
                                                 )
                                               ])

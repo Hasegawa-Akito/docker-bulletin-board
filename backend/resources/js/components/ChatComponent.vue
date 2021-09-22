@@ -55,7 +55,8 @@
                           <!--改行:style="white-space: pre-wrap;"-->
                           <p style="white-space: pre-wrap;">{{contents[n-1].message}}</p>
                         </v-list-item-subtitle>
-                        <small>{{contents[n-1].updated_at}}</small>
+                        <!--日付をisoフォーマットからDateの形にする(transform_Date関数はmethodで定義)-->
+                        <small>{{transform_Date(contents[n-1].updated_at)}}</small>
                       </v-list-item-content>
                     </v-list-item>
 
@@ -168,6 +169,10 @@ import axios from 'axios'
                 this.content_num=0;
                 this.show_content();
             },
+            transform_Date:function(iso){
+                var date = new Date(iso);
+                return date.toLocaleString();
+            }
     },
     created(){
               this.show_content();
