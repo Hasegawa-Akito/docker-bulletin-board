@@ -2571,120 +2571,58 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       headers: [{
-        text: 'Dessert (100g serving)',
+        text: '題目',
         align: 'start',
-        value: 'name'
+        value: 'title'
       }, {
-        text: 'Calories',
-        value: 'calories'
+        text: 'ルームid',
+        value: 'room_id'
       }, {
-        text: 'Fat (g)',
-        value: 'fat'
+        text: 'カテゴリー',
+        value: 'category'
       }, {
-        text: 'Carbs (g)',
-        value: 'carbs'
+        text: 'コメント数',
+        value: 'comment_num'
       }, {
-        text: 'Protein (g)',
-        value: 'protein'
-      }, {
-        text: 'Iron (%)',
-        value: 'iron'
+        text: '作成日',
+        value: 'created_at'
       }],
       desserts: [{
-        name: 'Frozen Yogurt',
-        calories: 159,
-        fat: 6.0,
-        carbs: 24,
-        protein: 4.0,
-        iron: '1%'
+        title: 'あめ',
+        room_id: 159,
+        category: 6.0,
+        comment_num: 24,
+        created_at: "2021-1-2"
       }, {
-        name: 'Ice cream sandwich',
-        calories: 237,
-        fat: 9.0,
-        carbs: 37,
-        protein: 4.3,
-        iron: '1%'
+        title: 'はれ',
+        room_id: 159,
+        category: 6.0,
+        comment_num: 24,
+        created_at: "2021-1-4"
       }, {
-        name: 'Eclair',
-        calories: 262,
-        fat: 16.0,
-        carbs: 23,
-        protein: 6.0,
-        iron: '7%'
-      }, {
-        name: 'Cupcake',
-        calories: 305,
-        fat: 3.7,
-        carbs: 67,
-        protein: 4.3,
-        iron: '8%'
-      }, {
-        name: 'Gingerbread',
-        calories: 356,
-        fat: 16.0,
-        carbs: 49,
-        protein: 3.9,
-        iron: '16%'
-      }, {
-        name: 'Jelly bean',
-        calories: 375,
-        fat: 0.0,
-        carbs: 94,
-        protein: 0.0,
-        iron: '0%'
-      }, {
-        name: 'Lollipop',
-        calories: 392,
-        fat: 0.2,
-        carbs: 98,
-        protein: 0,
-        iron: '2%'
-      }, {
-        name: 'Honeycomb',
-        calories: 408,
-        fat: 3.2,
-        carbs: 87,
-        protein: 6.5,
-        iron: '45%'
-      }, {
-        name: 'Donut',
-        calories: 452,
-        fat: 25.0,
-        carbs: 51,
-        protein: 4.9,
-        iron: '22%'
-      }, {
-        name: 'KitKat',
-        calories: 518,
-        fat: 26.0,
-        carbs: 65,
-        protein: 7,
-        iron: '6%'
-      }, {
-        name: 'KitKat',
-        calories: 518,
-        fat: 26.0,
-        carbs: 65,
-        protein: 7,
-        iron: '6%'
-      }, {
-        name: 'KitKat',
-        calories: 518,
-        fat: 26.0,
-        carbs: 65,
-        protein: 7,
-        iron: '6%'
-      }, {
-        name: 'KitKat',
-        calories: 518,
-        fat: 26.0,
-        carbs: 65,
-        protein: 7,
-        iron: '6%'
+        title: 'くもり',
+        room_id: 159,
+        category: 6.0,
+        comment_num: 24,
+        created_at: "2021-1-13"
       }]
     };
   }
@@ -39977,29 +39915,56 @@ var render = function() {
           _c(
             "v-card-text",
             [
-              _c("v-data-table", {
-                staticClass: "elevation-1",
-                attrs: { headers: _vm.headers, items: _vm.desserts },
-                scopedSlots: _vm._u(
-                  [
-                    {
-                      key: "header.name",
-                      fn: function(ref) {
-                        var header = ref.header
-                        return [
-                          _vm._v(
-                            "\n                " +
-                              _vm._s(header.text.toUpperCase()) +
-                              "\n                "
-                          )
-                        ]
-                      }
-                    }
-                  ],
-                  null,
-                  true
-                )
-              })
+               true
+                ? _c("v-data-table", {
+                    staticClass: "elevation-1",
+                    attrs: { headers: _vm.headers, items: _vm.desserts },
+                    scopedSlots: _vm._u(
+                      [
+                        {
+                          key: "item.room_id",
+                          fn: function(ref) {
+                            var item = ref.item
+                            return [
+                              _c(
+                                "v-chip",
+                                { attrs: { color: "red", dark: "" } },
+                                [
+                                  _vm._v(
+                                    "\n                        " +
+                                      _vm._s(item.room_id) +
+                                      "\n                    "
+                                  )
+                                ]
+                              )
+                            ]
+                          }
+                        },
+                        {
+                          key: "item.comment_num",
+                          fn: function(ref) {
+                            var item = ref.item
+                            return [
+                              _c(
+                                "v-chip",
+                                { attrs: { color: "red", dark: "" } },
+                                [
+                                  _vm._v(
+                                    "\n                        " +
+                                      _vm._s(item.comment_num) +
+                                      "\n                    "
+                                  )
+                                ]
+                              )
+                            ]
+                          }
+                        }
+                      ],
+                      null,
+                      true
+                    )
+                  })
+                : 0
             ],
             1
           )
