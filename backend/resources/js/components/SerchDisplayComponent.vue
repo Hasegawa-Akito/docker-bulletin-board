@@ -6,13 +6,16 @@
                     <!-- 強制スクロール位置 -->
                 <div class="col-12 mb-5 border border-success">
                     <label class="mt-3">ルームid：</label>
-                    <input type="number" class="form-control" placeholder="指定なし">
+                    <input type="number" name="room_id" class="form-control" placeholder="指定なし">
                     <br>
                     <label class="mt-3">掲示板の題名：</label>
-                    <input type="text" class="form-control" placeholder="指定なし">
+                    <input type="text" name="title" class="form-control" placeholder="指定なし">
                     <br>
                     <label>カテゴリー：</label>
-                    <select class="form-control">
+                    <select class="form-control" name="category">
+                        <option value="">
+                            指定なし
+                        </option>
                         <option v-for="cate in categories" v-bind:key="cate.category">
                             {{cate.category}}
                         </option>
@@ -54,7 +57,6 @@
         data(){
             return{
                 categories:[
-                        {category:"指定なし"},
                         {category:"エンターテイメント"},
                         {category:"社会・経済"},
                         {category:"健康・医療"},

@@ -2585,7 +2585,41 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    serch_room_id: {
+      type: Number,
+      required: true
+    },
+    serch_title: {
+      type: String,
+      required: true
+    },
+    serch_category: {
+      type: String,
+      required: true
+    },
+    show_serch_url: {
+      type: String,
+      required: true
+    },
+    back_url: {
+      type: String,
+      required: true
+    },
+    room_url: {
+      type: String,
+      required: true
+    }
+  },
   data: function data() {
     return {
       headers: [{
@@ -2605,26 +2639,36 @@ __webpack_require__.r(__webpack_exports__);
         text: '作成日',
         value: 'created_at'
       }],
-      desserts: [{
-        title: 'あめ',
-        room_id: 159,
-        category: 6.0,
-        comment_num: 24,
-        created_at: "2021-1-2"
-      }, {
-        title: 'はれ',
-        room_id: 159,
-        category: 6.0,
-        comment_num: 24,
-        created_at: "2021-1-4"
-      }, {
-        title: 'くもり',
-        room_id: 159,
-        category: 6.0,
-        comment_num: 24,
-        created_at: "2021-1-13"
-      }]
+      desserts: []
     };
+  },
+  methods: {
+    show_serch: function show_serch() {
+      var _this = this;
+
+      axios.post(this.show_serch_url, {
+        room_id: this.serch_room_id,
+        title: this.serch_title,
+        category: this.serch_category
+      }).then(function (response) {
+        _this.desserts = response.data.contents;
+      });
+    },
+    reload_onClick: function reload_onClick() {
+      this.desserts = [];
+      this.show_serch();
+    },
+    create_room_url: function create_room_url(room_id) {
+      var room_url = this.room_url + "/" + room_id;
+      return room_url;
+    },
+    transform_Date: function transform_Date(iso) {
+      var date = new Date(iso);
+      return date.toLocaleString();
+    }
+  },
+  created: function created() {
+    this.show_serch();
   }
 });
 
@@ -2641,6 +2685,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
 //
 //
 //
@@ -2695,8 +2742,6 @@ function scroll(position) {
   data: function data() {
     return {
       categories: [{
-        category: "指定なし"
-      }, {
         category: "エンターテイメント"
       }, {
         category: "社会・経済"
@@ -39893,7 +39938,7 @@ var render = function() {
             [
               _c(
                 "v-form",
-                { attrs: { method: "get" } },
+                { attrs: { method: "get", action: _vm.back_url } },
                 [
                   _c(
                     "v-btn",
@@ -39907,7 +39952,16 @@ var render = function() {
               _vm._v(" "),
               _c("v-toolbar-title", [
                 _vm._v("\n            検索結果\n            ")
-              ])
+              ]),
+              _vm._v(" "),
+              _c("v-spacer"),
+              _vm._v(" "),
+              _c(
+                "v-btn",
+                { attrs: { icon: "" }, on: { click: _vm.reload_onClick } },
+                [_c("v-icon", [_vm._v("mdi-sync")])],
+                1
+              )
             ],
             1
           ),
@@ -39922,13 +39976,36 @@ var render = function() {
                     scopedSlots: _vm._u(
                       [
                         {
+                          key: "item.title",
+                          fn: function(ref) {
+                            var item = ref.item
+                            return [
+                              _c(
+                                "a",
+                                {
+                                  attrs: {
+                                    href: _vm.create_room_url(item.room_id)
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                    　" +
+                                      _vm._s(item.title) +
+                                      "\n                    "
+                                  )
+                                ]
+                              )
+                            ]
+                          }
+                        },
+                        {
                           key: "item.room_id",
                           fn: function(ref) {
                             var item = ref.item
                             return [
                               _c(
                                 "v-chip",
-                                { attrs: { color: "red", dark: "" } },
+                                { attrs: { color: "blue", dark: "" } },
                                 [
                                   _vm._v(
                                     "\n                        " +
@@ -39941,20 +40018,14 @@ var render = function() {
                           }
                         },
                         {
-                          key: "item.comment_num",
+                          key: "item.created_at",
                           fn: function(ref) {
                             var item = ref.item
                             return [
-                              _c(
-                                "v-chip",
-                                { attrs: { color: "red", dark: "" } },
-                                [
-                                  _vm._v(
-                                    "\n                        " +
-                                      _vm._s(item.comment_num) +
-                                      "\n                    "
-                                  )
-                                ]
+                              _vm._v(
+                                "\n                      " +
+                                  _vm._s(_vm.transform_Date(item.created_at)) +
+                                  "\n                    \n                "
                               )
                             ]
                           }
@@ -40027,7 +40098,11 @@ var render = function() {
               _vm._v(" "),
               _c("input", {
                 staticClass: "form-control",
-                attrs: { type: "number", placeholder: "指定なし" }
+                attrs: {
+                  type: "number",
+                  name: "room_id",
+                  placeholder: "指定なし"
+                }
               }),
               _vm._v(" "),
               _c("br"),
@@ -40036,7 +40111,7 @@ var render = function() {
               _vm._v(" "),
               _c("input", {
                 staticClass: "form-control",
-                attrs: { type: "text", placeholder: "指定なし" }
+                attrs: { type: "text", name: "title", placeholder: "指定なし" }
               }),
               _vm._v(" "),
               _c("br"),
@@ -40045,17 +40120,25 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "select",
-                { staticClass: "form-control" },
-                _vm._l(_vm.categories, function(cate) {
-                  return _c("option", { key: cate.category }, [
+                { staticClass: "form-control", attrs: { name: "category" } },
+                [
+                  _c("option", { attrs: { value: "" } }, [
                     _vm._v(
-                      "\n                        " +
-                        _vm._s(cate.category) +
-                        "\n                    "
+                      "\n                        指定なし\n                    "
                     )
-                  ])
-                }),
-                0
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(_vm.categories, function(cate) {
+                    return _c("option", { key: cate.category }, [
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(cate.category) +
+                          "\n                    "
+                      )
+                    ])
+                  })
+                ],
+                2
               ),
               _vm._v(" "),
               _c("br"),

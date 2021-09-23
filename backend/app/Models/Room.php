@@ -31,5 +31,22 @@ class Room extends Model
         
         return true;
     }
+
+    public function serch_room($room_info){
+        $room_id=$room_info["room_id"];
+        if(!isset($room_id)){
+            $room_id="%";
+        }
+        $title="%".$room_info["title"]."%";
+        $category="%".$room_info["category"]."%";
+
+        $contents=Room::where('room_id','like',$room_id)
+                      ->where('title','like',$title)
+                      ->where('category','like',$category)
+                      ->orderBy('comment_num', 'desc')
+                      ->get();
+        
+        return $contents;
+    }
     
 }
