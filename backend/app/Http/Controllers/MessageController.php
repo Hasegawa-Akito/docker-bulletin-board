@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Message;
+use App\Models\Room;
+
 
 class MessageController extends Controller
 {
@@ -20,11 +22,14 @@ class MessageController extends Controller
         $message=new Message;
         $message->message_create($message_info);
 
+        //roomデータのコメント数を更新
+        $room=new Room;
+        $room->update_comment_num($room_id);
+
         $contents=Message::where("room_id",$room_id)
                          ->get();
 
         $json = ["contents" => $contents];
-        
         
         return response()->json($json);
     }
