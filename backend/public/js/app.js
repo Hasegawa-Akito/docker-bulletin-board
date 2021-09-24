@@ -39355,7 +39355,7 @@ var render = function() {
                   _c(
                     "v-btn",
                     { attrs: { icon: "", type: "submit" } },
-                    [_c("v-icon", [_vm._v("mdi-arrow-left")])],
+                    [_c("v-icon", [_vm._v("mdi-home-circle-outline")])],
                     1
                   )
                 ],
@@ -39943,7 +39943,7 @@ var render = function() {
                   _c(
                     "v-btn",
                     { attrs: { icon: "", type: "submit" } },
-                    [_c("v-icon", [_vm._v("mdi-arrow-left")])],
+                    [_c("v-icon", [_vm._v("mdi-home-circle-outline")])],
                     1
                   )
                 ],

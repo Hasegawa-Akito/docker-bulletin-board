@@ -11,7 +11,7 @@
                 v-bind:action="back_url"
                 >
                 <v-btn icon type="submit">
-                    <v-icon>mdi-arrow-left</v-icon>
+                    <v-icon>mdi-home-circle-outline</v-icon>
                 </v-btn>
                 </v-form>
                 
