@@ -2293,13 +2293,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-function scroll(position) {
-  window.scrollTo({
-    top: position,
-    behavior: "smooth"
-  });
-}
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     Display: {
@@ -2370,9 +2363,9 @@ function scroll(position) {
         var element = document.getElementById('create_display_target'); // 移動させたい位置の要素を取得
 
         var rect = element.getBoundingClientRect();
-        var position = rect.top; // 一番上からの位置を取得
+        var position = rect.top - 100; // 一番上からの位置を取得
 
-        scroll(position);
+        this.scroll(position);
         return "on";
       } else {
         return "off";
@@ -2385,6 +2378,12 @@ function scroll(position) {
         var ans = alert('タイトルを記入してください');
         event.preventDefault();
       }
+    },
+    scroll: function scroll(position) {
+      window.scrollTo({
+        top: position,
+        behavior: "smooth"
+      });
     }
   }
 });
@@ -2516,7 +2515,16 @@ __webpack_require__.r(__webpack_exports__);
     serch_display: function serch_display() {
       this.Create_Display = "create_display_off";
       this.Serch_Display = "serch_display_on";
+    },
+    TopScroll: function TopScroll() {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
     }
+  },
+  mounted: function mounted() {
+    this.TopScroll();
   }
 });
 
@@ -2533,7 +2541,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
 //
 //
 //
@@ -2717,13 +2724,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-function scroll(position) {
-  window.scrollTo({
-    top: position,
-    behavior: "smooth"
-  });
-}
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     Display: {
@@ -2790,13 +2790,21 @@ function scroll(position) {
         var element = document.getElementById('serch_display_target'); // 移動させたい位置の要素を取得
 
         var rect = element.getBoundingClientRect();
-        var position = rect.top; // 一番上からの位置を取得
+        var position = rect.top - 100; // 一番上からの位置を取得
 
-        scroll(position);
+        this.scroll(position);
         return "on";
       } else {
         return "off";
       }
+    }
+  },
+  methods: {
+    scroll: function scroll(position) {
+      window.scrollTo({
+        top: position,
+        behavior: "smooth"
+      });
     }
   }
 });

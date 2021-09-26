@@ -31,12 +31,6 @@
 </template>
 
 <script>
-    function scroll(position){
-        window.scrollTo({
-                        top: position,
-                        behavior: "smooth"
-        });
-    }
     
     export default {
         props: {
@@ -86,14 +80,22 @@
                 if(this.Display=="serch_display_on"){
                     var element = document.getElementById('serch_display_target'); // 移動させたい位置の要素を取得
                     var rect = element.getBoundingClientRect();
-                    var position = rect.top;    // 一番上からの位置を取得
-                    scroll(position);
+                    var position = rect.top-100;    // 一番上からの位置を取得
+                    this.scroll(position);
                     return "on";
                 }
                 else{
                     return "off";
                 }
             }
+        },
+        methods:{
+            scroll:function(position){
+                window.scrollTo({
+                        top: position,
+                        behavior: "smooth"
+                });
+            },
         },
         
     }

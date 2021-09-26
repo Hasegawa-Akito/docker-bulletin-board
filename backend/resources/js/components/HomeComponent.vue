@@ -86,6 +86,16 @@
                 this.Serch_Display="serch_display_on";
 
             },
+            TopScroll:function(){
+              window.scrollTo({
+                          top: 0,
+                          behavior: "smooth"
+              });
+            },
+        },
+        mounted(){
+              this.TopScroll();
+              
         },
     }
 </script>

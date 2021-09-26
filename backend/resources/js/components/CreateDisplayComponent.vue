@@ -25,12 +25,6 @@
 </template>
 
 <script>
-    function scroll(position){
-        window.scrollTo({
-                        top: position,
-                        behavior: "smooth"
-        });
-    }
     
     export default {
         props: {
@@ -74,6 +68,7 @@
                     ],
                 title:"",
                 category:"指定なし",
+                
             };
         },
         computed:{
@@ -82,8 +77,8 @@
                 if(this.Display=="create_display_on"){
                     var element = document.getElementById('create_display_target'); // 移動させたい位置の要素を取得
                     var rect = element.getBoundingClientRect();
-                    var position = rect.top;    // 一番上からの位置を取得
-                    scroll(position);
+                    var position = rect.top-100;    // 一番上からの位置を取得
+                    this.scroll(position);
                     return "on";
                 }
                 else{
@@ -97,6 +92,12 @@
                     const ans=alert('タイトルを記入してください');
                     event.preventDefault();
                 }
+            },
+            scroll:function(position){
+                window.scrollTo({
+                        top: position,
+                        behavior: "smooth"
+                });
             },
         },
         
