@@ -2171,6 +2171,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 //非同期通信に必要(vueが使えるなら特に他にすることはない)
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2219,9 +2227,9 @@ __webpack_require__.r(__webpack_exports__);
       });
       this.EndScroll();
     },
-    EndScroll: function EndScroll() {
+    Scroll: function Scroll(position) {
       window.scrollTo({
-        top: 10000000000,
+        top: position,
         behavior: "smooth"
       });
     },
@@ -2235,8 +2243,11 @@ __webpack_require__.r(__webpack_exports__);
         _this2.contents = response.data.contents;
       });
     },
-    scroll_onClick: function scroll_onClick() {
-      this.EndScroll();
+    EndScroll_onClick: function EndScroll_onClick() {
+      this.Scroll(1000000);
+    },
+    TopScroll_onClick: function TopScroll_onClick() {
+      this.Scroll(0);
     },
     reload_onClick: function reload_onClick() {
       this.content_num = 0;
@@ -39388,7 +39399,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "v-btn",
-                { attrs: { icon: "" }, on: { click: _vm.scroll_onClick } },
+                { attrs: { icon: "" }, on: { click: _vm.EndScroll_onClick } },
                 [_c("v-icon", [_vm._v("mdi-chevron-down-circle")])],
                 1
               )
@@ -39564,6 +39575,23 @@ var render = function() {
                   on: { click: _vm.send_onClick }
                 },
                 [_c("v-icon", [_vm._v("mdi-play")]), _vm._v("送信\n      ")],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-row",
+                [
+                  _c(
+                    "v-btn",
+                    {
+                      staticClass: "ml-auto",
+                      attrs: { icon: "" },
+                      on: { click: _vm.TopScroll_onClick }
+                    },
+                    [_c("v-icon", [_vm._v("mdi-chevron-up-circle")])],
+                    1
+                  )
+                ],
                 1
               )
             ],

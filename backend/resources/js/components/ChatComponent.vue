@@ -23,10 +23,11 @@
         <v-btn icon @click="reload_onClick">
           <v-icon>mdi-sync</v-icon>
         </v-btn>
-        <v-btn icon　@click="scroll_onClick">
+        <v-btn icon　@click="EndScroll_onClick">
           <v-icon>mdi-chevron-down-circle</v-icon>
         </v-btn>
       </v-app-bar>
+      
 
       <v-card-text>
         <v-main>
@@ -94,9 +95,16 @@
             ></v-text-field>
           </v-col>
         </v-row>
+        
         <v-btn class="info" small @click="send_onClick">
           <v-icon>mdi-play</v-icon>送信
         </v-btn>
+        
+        <v-row>
+          <v-btn class="ml-auto" icon　@click="TopScroll_onClick">
+            <v-icon>mdi-chevron-up-circle</v-icon>
+          </v-btn>
+        </v-row>
       </v-card-text>
     </v-card>
   </v-app>
@@ -149,9 +157,9 @@ import axios from 'axios'
                 });
                 this.EndScroll();
             },
-            EndScroll:function(){
+            Scroll:function(position){
               window.scrollTo({
-                          top: 10000000000,
+                          top: position,
                           behavior: "smooth"
               });
             },
@@ -162,8 +170,11 @@ import axios from 'axios'
                     this.contents=response.data.contents;
               })
             },
-            scroll_onClick:function(){
-                this.EndScroll();
+            EndScroll_onClick:function(){
+                this.Scroll(1000000);
+            },
+            TopScroll_onClick:function(){
+                this.Scroll(0);
             },
             reload_onClick:function(){
                 this.content_num=0;
