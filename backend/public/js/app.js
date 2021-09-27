@@ -2225,7 +2225,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.contents = response.data.contents;
         _this.message = "";
       });
-      this.EndScroll();
+      this.Scroll(1000000000);
     },
     Scroll: function Scroll(position) {
       window.scrollTo({

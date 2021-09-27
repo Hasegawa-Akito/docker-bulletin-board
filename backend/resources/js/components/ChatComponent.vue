@@ -155,7 +155,7 @@ import axios from 'axios'
                     this.message="";
                     
                 });
-                this.EndScroll();
+                this.Scroll(1000000000);
             },
             Scroll:function(position){
               window.scrollTo({
