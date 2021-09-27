@@ -25,8 +25,34 @@ class SerchController extends Controller
         return response()->json($json);
     }
 
+
     public function serch_room(Request $request){
         
+        $room_id=$request->room_id;
+        $title=$request->title;
+        $category=$request->category;
+        //dd($category);
+
+        $request->session()->put('room_id',$room_id);
+        $request->session()->put('title',$title);
+        $request->session()->put('category',$category);
+        $request->session()->put('session_exist',"exist");
+        
+        return view('serch',["room_id"=>$room_id,"title"=>$title,"category"=>$category]);
+
+    }
+
+    //"/serch_room"のurlを直接叩かれた時
+    public function serch_room_direct(Request $request){
+        $room_id=$request->session()->get('room_id');
+        $title=$request->session()->get('title');
+        $category=$request->session()->get('categor');
+        $session_exist=$request->session()->get('session_exist');
+
+        if(!isset($session_exist)){
+            return redirect(url('/home'));
+        }
+
         $room_id=$request->room_id;
         $title=$request->title;
         $category=$request->category;

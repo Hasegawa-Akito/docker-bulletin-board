@@ -36,6 +36,7 @@ Route::get('/chat/{room_id}','App\Http\Controllers\ChatController@show_chat');
 Route::post('/send_message','App\Http\Controllers\MessageController@send_message');
 Route::post('/show_content','App\Http\Controllers\MessageController@show_content');
 
+Route::get('/serch_room','App\Http\Controllers\SerchController@serch_room_direct');
 Route::post('/serch_room','App\Http\Controllers\SerchController@serch_room');
 Route::post('/show_serch','App\Http\Controllers\SerchController@show_serch');
 
