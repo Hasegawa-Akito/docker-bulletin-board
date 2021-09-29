@@ -1,10 +1,12 @@
 <template>
-    <div class="create-display" v-bind:class="Display">
+    <div class="create-display mt-4" v-bind:class="Display">
         <form v-bind:action="create_room_url" method="post" autocomplete='off'>
             <input type="hidden" name="_token" v-bind:value="csrf" >
-            <div class="form-group" v-bind:class="Display_show"  id='create_display_target'>
+            <div class="form-group" id='create_display_target'>
                     <!-- 強制スクロール位置 -->
                 <div class="col-12 mb-5 border border-primary">
+                    <label class="mt-3"><h3 class="text-primary">ルーム作成フォーム</h3></label>
+                    <br>
                     <label class="mt-3">掲示板の題名：</label>
                     <input type="text" name="title" class="form-control" v-model="title" placeholder="題名(必須)">
                     <br>
@@ -28,10 +30,6 @@
     
     export default {
         props: {
-            Display:{
-                type:String,
-                required:true
-            },
             create_room_url:{
                 type:String,
                 required:true
@@ -71,33 +69,12 @@
                 
             };
         },
-        computed:{
-            Display_show:function(){
-                
-                if(this.Display=="create_display_on"){
-                    var element = document.getElementById('create_display_target'); // 移動させたい位置の要素を取得
-                    var rect = element.getBoundingClientRect();
-                    var position = rect.top-100;    // 一番上からの位置を取得
-                    this.scroll(position);
-                    return "on";
-                }
-                else{
-                    return "off";
-                }
-            }
-        },
         methods:{
             not_empty:function(event){
                 if(this.title==" "||!this.title||this.title=="　"){
                     const ans=alert('タイトルを記入してください');
                     event.preventDefault();
                 }
-            },
-            scroll:function(position){
-                window.scrollTo({
-                        top: position,
-                        behavior: "smooth"
-                });
             },
         },
         

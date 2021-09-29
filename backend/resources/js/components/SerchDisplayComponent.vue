@@ -2,9 +2,11 @@
     <div class="create-display" v-bind:class="Display">
         <form v-bind:action="serch_room_url" method="post" autocomplete='off'>
             <input type="hidden" name="_token" v-bind:value="csrf" >
-            <div class="form-group" v-bind:class="Display_show"  id='serch_display_target'>
+            <div class="form-group" id='serch_display_target'>
                     <!-- 強制スクロール位置 -->
                 <div class="col-12 mb-5 border border-success">
+                    <label class="mt-3"><h3 class="text-success">ルーム検索フォーム</h3></label>
+                    <br>
                     <label class="mt-3">ルームid：</label>
                     <input type="number" name="room_id" class="form-control" placeholder="指定なし">
                     <br>
@@ -34,10 +36,6 @@
     
     export default {
         props: {
-            Display:{
-                type:String,
-                required:true
-            },
             serch_room_url:{
                 type:String,
                 required:true
@@ -73,29 +71,6 @@
                         {category:"その他"},
                     ],
             };
-        },
-        computed:{
-            Display_show:function(){
-                
-                if(this.Display=="serch_display_on"){
-                    var element = document.getElementById('serch_display_target'); // 移動させたい位置の要素を取得
-                    var rect = element.getBoundingClientRect();
-                    var position = rect.top-100;    // 一番上からの位置を取得
-                    this.scroll(position);
-                    return "on";
-                }
-                else{
-                    return "off";
-                }
-            }
-        },
-        methods:{
-            scroll:function(position){
-                window.scrollTo({
-                        top: position,
-                        behavior: "smooth"
-                });
-            },
         },
         
     }

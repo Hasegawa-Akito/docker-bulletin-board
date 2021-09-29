@@ -10,9 +10,9 @@
                 method="get"
                 v-bind:action="back_url"
                 >
-                <v-btn icon type="submit">
-                    <v-icon>mdi-home-circle-outline</v-icon>
-                </v-btn>
+                    <v-btn icon type="submit">
+                        <v-icon>mdi-home-circle-outline</v-icon>
+                    </v-btn>
                 </v-form>
                 
                 <v-toolbar-title>
@@ -34,22 +34,31 @@
                     class="elevation-1"
                 >
                     <template v-slot:[`item.title`]="{ item }">
-                        <a v-bind:href="create_room_url(item.room_id)">
                         　{{ item.title }}
-                        </a>
                     </template>
                     <template v-slot:[`item.room_id`]="{ item }">
-                        <v-chip
-                            :color="'blue'"
-                            dark
-                        >
-                            {{ item.room_id }}
-                        </v-chip>
+                        {{ item.room_id }}
                     </template>
                     
                     <template v-slot:[`item.created_at`]="{ item }">
                           {{ transform_Date(item.created_at) }}
                         
+                    </template>
+
+                    <template v-slot:[`item.enter_room`]="{ item }">
+                        <v-form
+                        method="get"
+                        v-bind:action="create_room_url(item.room_id)"
+                        >
+                            <v-btn icon type="submit">
+                                <v-chip
+                                    :color="'blue'"
+                                    dark
+                                >
+                                    入室
+                                </v-chip>
+                            </v-btn>
+                        </v-form>
                     </template>
                 </v-data-table>
             </v-card-text>
@@ -99,6 +108,7 @@
           { text: 'カテゴリー', value: 'category' },
           { text: 'コメント数', value: 'comment_num' },
           { text: '作成日', value: 'created_at' },
+          { text: '　', value: 'enter_room' },
         ],
         desserts: [],
       }

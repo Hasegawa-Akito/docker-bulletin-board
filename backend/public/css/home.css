@@ -1,14 +1,4 @@
-.create_display_off{
-    opacity: 0;
-    pointer-events: none;
-}
-.create_display_on{
-    opacity: 1;
-}
-.serch_display_off{
-    opacity: 0;
-    pointer-events: none;
-}
-.serch_display_on{
-    opacity: 1;
+
+.select_box{
+    width: 90%;
 }

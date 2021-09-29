@@ -2304,12 +2304,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
-    Display: {
-      type: String,
-      required: true
-    },
     create_room_url: {
       type: String,
       required: true
@@ -2368,33 +2366,12 @@ __webpack_require__.r(__webpack_exports__);
       category: "指定なし"
     };
   },
-  computed: {
-    Display_show: function Display_show() {
-      if (this.Display == "create_display_on") {
-        var element = document.getElementById('create_display_target'); // 移動させたい位置の要素を取得
-
-        var rect = element.getBoundingClientRect();
-        var position = rect.top - 100; // 一番上からの位置を取得
-
-        this.scroll(position);
-        return "on";
-      } else {
-        return "off";
-      }
-    }
-  },
   methods: {
     not_empty: function not_empty(event) {
       if (this.title == " " || !this.title || this.title == "　") {
         var ans = alert('タイトルを記入してください');
         event.preventDefault();
       }
-    },
-    scroll: function scroll(position) {
-      window.scrollTo({
-        top: position,
-        behavior: "smooth"
-      });
     }
   }
 });
@@ -2497,6 +2474,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2520,22 +2498,31 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     create_display: function create_display() {
+      this.Create_Display = "create_display_off";
       this.Create_Display = "create_display_on";
       this.Serch_Display = "serch_display_off";
+      var element = document.getElementById('create_display_target'); // 移動させたい位置の要素を取得
+
+      var rect = element.getBoundingClientRect();
+      var position = rect.top - 100; // 一番上からの位置を取得
+
+      this.scroll(position);
     },
     serch_display: function serch_display() {
+      this.Serch_Display = "serch_display_off";
       this.Create_Display = "create_display_off";
       this.Serch_Display = "serch_display_on";
+      this.scroll(1000000);
     },
-    TopScroll: function TopScroll() {
+    scroll: function scroll(position) {
       window.scrollTo({
-        top: 0,
+        top: position,
         behavior: "smooth"
       });
     }
   },
   mounted: function mounted() {
-    this.TopScroll();
+    this.scroll(0);
   }
 });
 
@@ -2552,6 +2539,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2656,6 +2652,9 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         text: '作成日',
         value: 'created_at'
+      }, {
+        text: '　',
+        value: 'enter_room'
       }],
       desserts: []
     };
@@ -2735,12 +2734,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
-    Display: {
-      type: String,
-      required: true
-    },
     serch_room_url: {
       type: String,
       required: true
@@ -2794,29 +2791,6 @@ __webpack_require__.r(__webpack_exports__);
         category: "その他"
       }]
     };
-  },
-  computed: {
-    Display_show: function Display_show() {
-      if (this.Display == "serch_display_on") {
-        var element = document.getElementById('serch_display_target'); // 移動させたい位置の要素を取得
-
-        var rect = element.getBoundingClientRect();
-        var position = rect.top - 100; // 一番上からの位置を取得
-
-        this.scroll(position);
-        return "on";
-      } else {
-        return "off";
-      }
-    }
-  },
-  methods: {
-    scroll: function scroll(position) {
-      window.scrollTo({
-        top: position,
-        behavior: "smooth"
-      });
-    }
   }
 });
 
@@ -39627,7 +39601,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "create-display", class: _vm.Display }, [
+  return _c("div", { staticClass: "create-display mt-4", class: _vm.Display }, [
     _c(
       "form",
       {
@@ -39645,13 +39619,13 @@ var render = function() {
         _vm._v(" "),
         _c(
           "div",
-          {
-            staticClass: "form-group",
-            class: _vm.Display_show,
-            attrs: { id: "create_display_target" }
-          },
+          { staticClass: "form-group", attrs: { id: "create_display_target" } },
           [
             _c("div", { staticClass: "col-12 mb-5 border border-primary" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("br"),
+              _vm._v(" "),
               _c("label", { staticClass: "mt-3" }, [_vm._v("掲示板の題名：")]),
               _vm._v(" "),
               _c("input", {
@@ -39745,7 +39719,16 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "mt-3" }, [
+      _c("h3", { staticClass: "text-primary" }, [_vm._v("ルーム作成フォーム")])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -39823,13 +39806,12 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "select-option" },
     [
       _c(
         "div",
-        { staticClass: "row row-cols-1 row-cols-md-2 mb-3 text-center" },
+        { staticClass: "row row-cols-1 row-cols-md-1 mb-1 text-center" },
         [
-          _c("div", { staticClass: "col" }, [
+          _c("div", { staticClass: "select_box mb-4" }, [
             _c("div", { staticClass: "card mb-4 shadow-sm" }, [
               _vm._m(0),
               _vm._v(" "),
@@ -39853,7 +39835,7 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col" }, [
+          _c("div", { staticClass: "select_box mb-4" }, [
             _c("div", { staticClass: "card mb-4 shadow-sm" }, [
               _vm._m(2),
               _vm._v(" "),
@@ -39880,19 +39862,11 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("create-display-component", {
-        attrs: {
-          Display: _vm.Create_Display,
-          create_room_url: _vm.create_room_url,
-          csrf: _vm.csrf
-        }
+        attrs: { create_room_url: _vm.create_room_url, csrf: _vm.csrf }
       }),
       _vm._v(" "),
       _c("serch-display-component", {
-        attrs: {
-          Display: _vm.Serch_Display,
-          serch_room_url: _vm.serch_room_url,
-          csrf: _vm.csrf
-        }
+        attrs: { serch_room_url: _vm.serch_room_url, csrf: _vm.csrf }
       })
     ],
     1
@@ -40016,20 +39990,10 @@ var render = function() {
                           fn: function(ref) {
                             var item = ref.item
                             return [
-                              _c(
-                                "a",
-                                {
-                                  attrs: {
-                                    href: _vm.create_room_url(item.room_id)
-                                  }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                    　" +
-                                      _vm._s(item.title) +
-                                      "\n                    "
-                                  )
-                                ]
+                              _vm._v(
+                                "\n                    　" +
+                                  _vm._s(item.title) +
+                                  "\n                "
                               )
                             ]
                           }
@@ -40039,16 +40003,10 @@ var render = function() {
                           fn: function(ref) {
                             var item = ref.item
                             return [
-                              _c(
-                                "v-chip",
-                                { attrs: { color: "blue", dark: "" } },
-                                [
-                                  _vm._v(
-                                    "\n                        " +
-                                      _vm._s(item.room_id) +
-                                      "\n                    "
-                                  )
-                                ]
+                              _vm._v(
+                                "\n                    " +
+                                  _vm._s(item.room_id) +
+                                  "\n                "
                               )
                             ]
                           }
@@ -40062,6 +40020,42 @@ var render = function() {
                                 "\n                      " +
                                   _vm._s(_vm.transform_Date(item.created_at)) +
                                   "\n                    \n                "
+                              )
+                            ]
+                          }
+                        },
+                        {
+                          key: "item.enter_room",
+                          fn: function(ref) {
+                            var item = ref.item
+                            return [
+                              _c(
+                                "v-form",
+                                {
+                                  attrs: {
+                                    method: "get",
+                                    action: _vm.create_room_url(item.room_id)
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "v-btn",
+                                    { attrs: { icon: "", type: "submit" } },
+                                    [
+                                      _c(
+                                        "v-chip",
+                                        { attrs: { color: "blue", dark: "" } },
+                                        [
+                                          _vm._v(
+                                            "\n                                入室\n                            "
+                                          )
+                                        ]
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
                               )
                             ]
                           }
@@ -40123,13 +40117,13 @@ var render = function() {
         _vm._v(" "),
         _c(
           "div",
-          {
-            staticClass: "form-group",
-            class: _vm.Display_show,
-            attrs: { id: "serch_display_target" }
-          },
+          { staticClass: "form-group", attrs: { id: "serch_display_target" } },
           [
             _c("div", { staticClass: "col-12 mb-5 border border-success" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("br"),
+              _vm._v(" "),
               _c("label", { staticClass: "mt-3" }, [_vm._v("ルームid：")]),
               _vm._v(" "),
               _c("input", {
@@ -40196,7 +40190,16 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "mt-3" }, [
+      _c("h3", { staticClass: "text-success" }, [_vm._v("ルーム検索フォーム")])
+    ])
+  }
+]
 render._withStripped = true
 
 

@@ -1,7 +1,7 @@
 <template>
-    <div class="select-option">
-        <div class="row row-cols-1 row-cols-md-2 mb-3 text-center">
-            <div class="col">
+<div>
+        <div class="row row-cols-1 row-cols-md-1 mb-1 text-center">
+            <div class="select_box mb-4">
                 <div class="card mb-4 shadow-sm">
                     <div class="card-header">
                         <h4 class="my-0 fw-normal">ルーム作成</h4>
@@ -18,7 +18,7 @@
             </div>
             
 
-            <div class="col">
+            <div class="select_box mb-4">
                 <div class="card mb-4 shadow-sm">
                     <div class="card-header">
                         <h4 class="my-0 fw-normal">ルーム検索</h4>
@@ -35,21 +35,22 @@
                     </div>
                 </div>
             </div>
+
+
         </div>
         
         <create-display-component
-            v-bind:Display="Create_Display"
             v-bind:create_room_url="create_room_url"
             v-bind:csrf="csrf"
         ></create-display-component>
 
         <serch-display-component
-            v-bind:Display="Serch_Display"
             v-bind:serch_room_url="serch_room_url"
             v-bind:csrf="csrf"
         ></serch-display-component>
 
-    </div>
+    
+</div>
 </template>
 
 <script>
@@ -59,7 +60,7 @@
         data(){
             return{
                 Create_Display:"create_display_off",
-                Serch_Display:"serch_display_off"
+                Serch_Display:"serch_display_off",
             };
         },
         props: {
@@ -78,23 +79,30 @@
         },
         methods:{
             create_display:function(){
+                this.Create_Display="create_display_off";
                 this.Create_Display="create_display_on";
                 this.Serch_Display="serch_display_off";
+                var element = document.getElementById('create_display_target'); // 移動させたい位置の要素を取得
+                var rect = element.getBoundingClientRect();
+                var position = rect.top-100;    // 一番上からの位置を取得
+                this.scroll(position);
             },
             serch_display:function(){
+                this.Serch_Display="serch_display_off";
                 this.Create_Display="create_display_off";
                 this.Serch_Display="serch_display_on";
+                this.scroll(1000000);
 
             },
-            TopScroll:function(){
+            scroll:function(position){
               window.scrollTo({
-                          top: 0,
+                          top: position,
                           behavior: "smooth"
               });
             },
         },
         mounted(){
-              this.TopScroll();
+              this.scroll(0);
               
         },
     }
